@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 // == State
 // On récupère le state initial de l'app qu'on vient stocker au niveau du store
@@ -12,7 +13,16 @@ const initialeState = {
 const reducer = (state = initialeState, action) => {
   console.log('state', state);
   console.log('action', action);
-  return state;
+  switch (action.type) {
+    case 'CHANGE_DIRECTION_TO_LEFT':
+      return {
+        ...state,
+        direction: '270deg',
+      };
+
+    default:
+      return state;
+  }
 };
 
 export default reducer;
