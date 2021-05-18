@@ -9,6 +9,10 @@ const initialeState = {
 };
 
 // Le reducer est une fonction. On passe le state initial au reducer. Le rôle du reducer est de retrouner toujours un state
-const reducer = (state = initialeState) => state;
+const reducer = (state = initialeState, action) => {
+  console.log('state', state);
+  console.log('action', action);
+  return state;
+};
 
 export default reducer;

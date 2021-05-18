@@ -12,6 +12,9 @@ import { randomHexColor, generateSpanColor } from './utils';
 
 // == Rendu dans le DOM
 function renderNbColors() {
+  // à chaque rendu de la div nbColors, je veux récupérer
+  // les nouvelles valeurs du state
+  // j'appelle donc store.getState() pour avoir le state courant
   const { nbColors } = store.getState();
 
   document.getElementById('nbColors').innerHTML = `
@@ -82,7 +85,21 @@ document.getElementById('randLast')
 
 document.getElementById('toLeft')
   .addEventListener('click', () => {
-    state.direction = '270deg';
+    // ici on veut changer la valeur de la propriété "direction" du state
+    // le state est désormais dans le store. Il va donc falloir discuter
+    // avec le store. Pour faire ça on va passer par dispatch
+    // store.dispatch('CHANGE_LA_DIRECTION');
+
+    // l'action qu'on va donner au store va être un objet
+    // une action a toujours une propriété "type"
+    // par convention le type d'action est écrit en UPPERCASE_SNAKE_CASE
+    const action = {
+      type: 'CHANGE_DIRECTION_TO_LEFT',
+    };
+
+    store.dispatch(action);
+
+    // state.direction = '270deg';
     renderGradient();
     renderColors();
   });
