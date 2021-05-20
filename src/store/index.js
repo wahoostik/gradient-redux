@@ -12,6 +12,29 @@ import reducer from 'src/reducers';
 // dispatch : va nous permettre de changer des valeurs du state, en donnant une action à faire
 // subscribe : une fonction qui nous permet de nous abonner aux changements du state.
 const store = createStore(reducer);
+
+// Ce qui se passe dans les coulisses
+/*
+const myCreateStore = (reducer) => {
+//   // on vient récupérer le state courant
+  let state = reducer();
+//   // on instancie un tableau qui viendra tous les callback
+//   // à appeler quand on modifie le state
+  const subscribes = [];
+
+  return {
+    getState: () => ({ ...state }),
+    dispatch: (action) => {
+      state = reducer(state, action);
+      subscribers.forEach((subscriber) => subscriber());
+    },
+    subscribe: (callback) => {
+      subscribers.push(callback);
+    }
+  }
+}
+*/
+
 console.log('store', store);
 console.log('store getState', store.getState());
 

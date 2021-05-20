@@ -1,5 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
+
+// import { randomHexColor } from '../utils';
+
 // == State
 // On récupère le state initial de l'app qu'on vient stocker au niveau du store
 const initialeState = {
@@ -15,9 +18,28 @@ const reducer = (state = initialeState, action) => {
   console.log('action', action);
   switch (action.type) {
     case 'CHANGE_DIRECTION_TO_LEFT':
+      // Ici on crée un nouvel objet pour le state. On est en déclaratif, il y a toujours la notion d'immutabilité
       return {
         ...state,
         direction: '270deg',
+      };
+
+    case 'CHANGE_DIRECTION_TO_RIGHT':
+      return {
+        ...state,
+        direction: '90deg',
+      };
+
+    case 'RANDOMIZE_FIRST_COLOR':
+      return {
+        ...state,
+        nbColors: state.nbColors + 1,
+        // solution 1
+        // on a la possibilité de venir éxécuter la fonction randomHexColor directement dans le nouveau state
+        // firstColor: randomHexColor(),
+        // solution 2
+        // placer la donnée dans une propriété de l'objet action. Cette propriété peut s'appeler 'payload'
+        firstColor: action.firstColor,
       };
 
     default:

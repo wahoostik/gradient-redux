@@ -42,9 +42,19 @@ function renderColors() {
 }
 
 // == Initialisation
+// On garde l'éxécution de ces 3 fonctions pour le rendu initial
 renderNbColors();
 renderGradient();
 renderColors();
+
+// On souscrit au changements du State
+// à chaque fois qu'on va faire un store.dispatch
+// une fois que le nouveau state est généré, on veut
+// réexécuter chaque fonction de rendu
+// pour faire ça, on souscrit aux changements du state avec subscribe
+store.subscribe(renderNbColors);
+store.subscribe(renderGradient);
+store.subscribe(renderColors);
 
 // == Controls
 document.getElementById('randAll')
@@ -60,27 +70,33 @@ document.getElementById('randAll')
     state.firstColor = randomHexColor();
     state.lastColor = randomHexColor();
     // ui
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    // renderNbColors();
+    // renderGradient();
+    // renderColors();
   });
 
 document.getElementById('randFirst')
   .addEventListener('click', () => {
-    state.nbColors += 1;
-    state.firstColor = randomHexColor();
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    const action = {
+      type: 'RANDOMIZE_FIRST_COLOR',
+      // solution 2 (voir dans le reducer) :
+      firstColor: randomHexColor(),
+    };
+    store.dispatch(action);
+    // state.nbColors += 1;
+    // state.firstColor = randomHexColor();
+    // renderNbColors();
+    // renderGradient();
+    // renderColors();
   });
 
 document.getElementById('randLast')
   .addEventListener('click', () => {
     state.nbColors += 1;
     state.lastColor = randomHexColor();
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    // renderNbColors();
+    // renderGradient();
+    // renderColors();
   });
 
 document.getElementById('toLeft')
@@ -100,13 +116,17 @@ document.getElementById('toLeft')
     store.dispatch(action);
 
     // state.direction = '270deg';
-    renderGradient();
-    renderColors();
+    // renderGradient();
+    // renderColors();
   });
 
 document.getElementById('toRight')
   .addEventListener('click', () => {
-    state.direction = '90deg';
-    renderGradient();
-    renderColors();
+    const action = {
+      type: 'CHANGE_DIRECTION_TO_RIGHT',
+    };
+    store.dispatch(action);
+    // state.direction = '90deg';
+    // renderGradient();
+    // renderColors();
   });
