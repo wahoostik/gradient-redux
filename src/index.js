@@ -9,7 +9,7 @@
 import store from './store';
 import { randomHexColor, generateSpanColor } from './utils';
 import {
-  changeDirectionToLeft, changeDirectionToRight, randomizeFirstColor, randomizeLastColor,
+  changeDirectionToLeft, changeDirectionToRight, changeDirectionTo45, randomizeFirstColor, randomizeLastColor,
 } from './actions';
 
 // == Rendu dans le DOM
@@ -126,4 +126,22 @@ document.getElementById('toRight')
     // state.direction = '90deg';
     // renderGradient();
     // renderColors();
+  });
+
+document.getElementById('to45')
+  .addEventListener('click', () => {
+    const action = changeDirectionTo45();
+    store.dispatch(action);
+  });
+document.getElementById('to135')
+  .addEventListener('click', () => {
+    store.dispatch(changeDirection('135deg'));
+  });
+document.getElementById('to225')
+  .addEventListener('click', () => {
+    store.dispatch(changeDirection('225deg'));
+  });
+document.getElementById('to315')
+  .addEventListener('click', () => {
+    store.dispatch(changeDirection('315deg'));
   });

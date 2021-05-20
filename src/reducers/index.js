@@ -3,7 +3,7 @@
 
 // import { randomHexColor } from '../utils';
 import {
-  CHANGE_DIRECTION_TO_LEFT, CHANGE_DIRECTION_TO_RIGHT, RANDOMIZE_FIRST_COLOR, RANDOMIZE_LAST_COLOR,
+  CHANGE_DIRECTION_TO_LEFT, CHANGE_DIRECTION_TO_RIGHT, CHANGE_DIRECTION_TO_45, RANDOMIZE_FIRST_COLOR, RANDOMIZE_LAST_COLOR,
 } from '../actions';
 
 // == State
@@ -16,6 +16,7 @@ const initialeState = {
 };
 
 // Le reducer est une fonction. On passe le state initial au reducer. Le rôle du reducer est de retrouner toujours un state
+// action est un objet, action = {}
 const reducer = (state = initialeState, action) => {
   console.log('state', state);
   console.log('action', action);
@@ -23,7 +24,7 @@ const reducer = (state = initialeState, action) => {
     case CHANGE_DIRECTION_TO_LEFT:
       // Ici on crée un nouvel objet pour le state. On est en déclaratif, il y a toujours la notion d'immutabilité
       return {
-        ...state,
+        ...state, // Ici on garde le state et on rajoute la nouvelle donnée
         direction: '270deg',
       };
 
@@ -31,6 +32,12 @@ const reducer = (state = initialeState, action) => {
       return {
         ...state,
         direction: '90deg',
+      };
+
+    case CHANGE_DIRECTION_TO_45:
+      return {
+        ...state,
+        direction: '45deg',
       };
 
     case RANDOMIZE_FIRST_COLOR:
