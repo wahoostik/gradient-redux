@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 // == Imports
@@ -11,7 +12,10 @@ import reducer from 'src/reducers';
 // getState : va nous permettre de récupérer le state courant
 // dispatch : va nous permettre de changer des valeurs du state, en donnant une action à faire
 // subscribe : une fonction qui nous permet de nous abonner aux changements du state.
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 // Ce qui se passe dans les coulisses
 /*
