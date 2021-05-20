@@ -2,6 +2,9 @@
 /* eslint-disable max-len */
 
 // import { randomHexColor } from '../utils';
+import {
+  CHANGE_DIRECTION_TO_LEFT, CHANGE_DIRECTION_TO_RIGHT, RANDOMIZE_FIRST_COLOR, RANDOMIZE_LAST_COLOR,
+} from '../actions';
 
 // == State
 // On récupère le state initial de l'app qu'on vient stocker au niveau du store
@@ -17,20 +20,20 @@ const reducer = (state = initialeState, action) => {
   console.log('state', state);
   console.log('action', action);
   switch (action.type) {
-    case 'CHANGE_DIRECTION_TO_LEFT':
+    case CHANGE_DIRECTION_TO_LEFT:
       // Ici on crée un nouvel objet pour le state. On est en déclaratif, il y a toujours la notion d'immutabilité
       return {
         ...state,
         direction: '270deg',
       };
 
-    case 'CHANGE_DIRECTION_TO_RIGHT':
+    case CHANGE_DIRECTION_TO_RIGHT:
       return {
         ...state,
         direction: '90deg',
       };
 
-    case 'RANDOMIZE_FIRST_COLOR':
+    case RANDOMIZE_FIRST_COLOR:
       return {
         ...state,
         nbColors: state.nbColors + 1,
@@ -42,7 +45,7 @@ const reducer = (state = initialeState, action) => {
         firstColor: action.firstColor,
       };
 
-    case 'RANDOMIZE_LAST_COLOR':
+    case RANDOMIZE_LAST_COLOR:
       return {
         ...state,
         nbColors: state.nbColors + 1,

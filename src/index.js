@@ -7,8 +7,10 @@
 
 // == Imports
 import store from './store';
-
 import { randomHexColor, generateSpanColor } from './utils';
+import {
+  changeDirectionToLeft, changeDirectionToRight, randomizeFirstColor, randomizeLastColor,
+} from './actions';
 
 // == Rendu dans le DOM
 function renderNbColors() {
@@ -66,16 +68,9 @@ document.getElementById('randAll')
     // debug
     console.log('Random all colors');
     // On peut également écrire tout dans le store.dispatch au lieu de faire une const en amont
-    store.dispatch({
-      type: 'RANDOMIZE_FIRST_COLOR',
-      // solution 2 (voir dans le reducer) :
-      firstColor: randomHexColor(),
-    });
-    store.dispatch({
-      type: 'RANDOMIZE_LAST_COLOR',
-      // solution 2 (voir dans le reducer) :
-      lastColor: randomHexColor(),
-    });
+    const firstColor = randomHexColor();
+    store.dispatch(randomizeFirstColor(firstColor));
+    store.dispatch(randomizeLastColor());
     // data
     // state.nbColors += 2;
     // state.firstColor = randomHexColor();
@@ -88,11 +83,8 @@ document.getElementById('randAll')
 
 document.getElementById('randFirst')
   .addEventListener('click', () => {
-    const action = {
-      type: 'RANDOMIZE_FIRST_COLOR',
-      // solution 2 (voir dans le reducer) :
-      firstColor: randomHexColor(),
-    };
+    const firstColor = randomHexColor();
+    const action = (randomizeFirstColor(firstColor));
     store.dispatch(action);
     // state.nbColors += 1;
     // state.firstColor = randomHexColor();
@@ -103,11 +95,7 @@ document.getElementById('randFirst')
 
 document.getElementById('randLast')
   .addEventListener('click', () => {
-    const action = {
-      type: 'RANDOMIZE_LAST_COLOR',
-      lastColor: randomHexColor(),
-    };
-    store.dispatch(action);
+    store.dispatch(randomizeLastColor());
     // state.nbColors += 1;
     // state.lastColor = randomHexColor();
     // renderNbColors();
@@ -125,11 +113,7 @@ document.getElementById('toLeft')
     // l'action qu'on va donner au store va être un objet
     // une action a toujours une propriété "type"
     // par convention le type d'action est écrit en UPPERCASE_SNAKE_CASE
-    const action = {
-      type: 'CHANGE_DIRECTION_TO_LEFT',
-    };
-
-    store.dispatch(action);
+    store.dispatch(changeDirectionToLeft());
 
     // state.direction = '270deg';
     // renderGradient();
@@ -138,10 +122,7 @@ document.getElementById('toLeft')
 
 document.getElementById('toRight')
   .addEventListener('click', () => {
-    const action = {
-      type: 'CHANGE_DIRECTION_TO_RIGHT',
-    };
-    store.dispatch(action);
+    store.dispatch(changeDirectionToRight());
     // state.direction = '90deg';
     // renderGradient();
     // renderColors();
