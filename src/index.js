@@ -65,10 +65,21 @@ document.getElementById('randAll')
 
     // debug
     console.log('Random all colors');
+    // On peut également écrire tout dans le store.dispatch au lieu de faire une const en amont
+    store.dispatch({
+      type: 'RANDOMIZE_FIRST_COLOR',
+      // solution 2 (voir dans le reducer) :
+      firstColor: randomHexColor(),
+    });
+    store.dispatch({
+      type: 'RANDOMIZE_LAST_COLOR',
+      // solution 2 (voir dans le reducer) :
+      lastColor: randomHexColor(),
+    });
     // data
-    state.nbColors += 2;
-    state.firstColor = randomHexColor();
-    state.lastColor = randomHexColor();
+    // state.nbColors += 2;
+    // state.firstColor = randomHexColor();
+    // state.lastColor = randomHexColor();
     // ui
     // renderNbColors();
     // renderGradient();
@@ -92,8 +103,13 @@ document.getElementById('randFirst')
 
 document.getElementById('randLast')
   .addEventListener('click', () => {
-    state.nbColors += 1;
-    state.lastColor = randomHexColor();
+    const action = {
+      type: 'RANDOMIZE_LAST_COLOR',
+      lastColor: randomHexColor(),
+    };
+    store.dispatch(action);
+    // state.nbColors += 1;
+    // state.lastColor = randomHexColor();
     // renderNbColors();
     // renderGradient();
     // renderColors();

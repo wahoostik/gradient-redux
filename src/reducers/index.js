@@ -42,6 +42,13 @@ const reducer = (state = initialeState, action) => {
         firstColor: action.firstColor,
       };
 
+    case 'RANDOMIZE_LAST_COLOR':
+      return {
+        ...state,
+        nbColors: state.nbColors + 1,
+        lastColor: action.lastColor,
+      };
+
     default:
       return state;
   }
