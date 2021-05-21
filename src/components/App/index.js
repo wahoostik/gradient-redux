@@ -15,7 +15,7 @@ import './styles.scss';
 const App = () => (
   <div className="app">
     <img src={reactLogo} alt="react logo" />
-    <h1>Gradient Redux</h1>
+    <h1>Gradient React-Redux</h1>
     <NbColors />
     <RandomButtons />
     <Colors />
