@@ -4,15 +4,15 @@ import './styles.scss';
 
 const Colors = () => {
   // Je récupère les infos du state (initialeState de index.js/reducers)
-  const theFirstColor = useSelector((state) => state.firstColor);
-  const theLastColor = useSelector((state) => state.lastColor);
-  const theDirection = useSelector((state) => state.direction);
-  // const { theFirstColor, theLastColor, theDirection } = useSelector((state) => state);
+  // const theFirstColor = useSelector((state) => state.firstColor);
+  // const theLastColor = useSelector((state) => state.lastColor);
+  // const theDirection = useSelector((state) => state.direction);
+  const { firstColor, lastColor, direction } = useSelector((state) => state);
   return (
     <div className="colors">
-      <span style={{ color: `${theFirstColor}` }}>{theFirstColor}</span>
-      <span style={{ transform: `rotate(${theDirection})` }}>↑</span>
-      <span style={{ color: `${theLastColor}` }}>{theLastColor}</span>
+      <span style={{ color: `${firstColor}` }}>{firstColor}</span>
+      <span style={{ transform: `rotate(${direction})` }}>↑</span>
+      <span style={{ color: `${lastColor}` }}>{lastColor}</span>
     </div>
   );
 };
