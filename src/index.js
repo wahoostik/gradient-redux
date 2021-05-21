@@ -9,7 +9,7 @@
 import store from './store';
 import { randomHexColor, generateSpanColor } from './utils';
 import {
-  changeDirectionToLeft, changeDirectionToRight, changeDirectionTo45, randomizeFirstColor, randomizeLastColor,
+  changeDirection, randomizeFirstColor, randomizeLastColor,
 } from './actions';
 
 // == Rendu dans le DOM
@@ -31,14 +31,14 @@ function renderGradient() {
   `;
 }
 function renderColors() {
+  // const state = store.getState();
+  // const { direction, firstColor, lastColor } = state;
   const { direction, firstColor, lastColor } = store.getState();
 
   const firstSpan = generateSpanColor(firstColor);
   const lastSpan = generateSpanColor(lastColor);
 
-  const result = direction === '90deg'
-    ? `${firstSpan} → ${lastSpan}`
-    : `${lastSpan} ← ${firstSpan}`;
+  const result = `${firstSpan} <span style="transform: rotate(${direction})">↑</span> ${lastSpan}`;
 
   document.getElementById('colors').innerHTML = result;
 }
@@ -113,7 +113,7 @@ document.getElementById('toLeft')
     // l'action qu'on va donner au store va être un objet
     // une action a toujours une propriété "type"
     // par convention le type d'action est écrit en UPPERCASE_SNAKE_CASE
-    store.dispatch(changeDirectionToLeft());
+    store.dispatch(changeDirection('270deg'));
 
     // state.direction = '270deg';
     // renderGradient();
@@ -122,7 +122,7 @@ document.getElementById('toLeft')
 
 document.getElementById('toRight')
   .addEventListener('click', () => {
-    store.dispatch(changeDirectionToRight());
+    store.dispatch(changeDirection('90deg'));
     // state.direction = '90deg';
     // renderGradient();
     // renderColors();
@@ -130,7 +130,7 @@ document.getElementById('toRight')
 
 document.getElementById('to45')
   .addEventListener('click', () => {
-    const action = changeDirectionTo45();
+    const action = changeDirection('45deg');
     store.dispatch(action);
   });
 document.getElementById('to135')

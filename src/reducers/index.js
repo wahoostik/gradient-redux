@@ -3,7 +3,7 @@
 
 // import { randomHexColor } from '../utils';
 import {
-  CHANGE_DIRECTION_TO_LEFT, CHANGE_DIRECTION_TO_RIGHT, CHANGE_DIRECTION_TO_45, RANDOMIZE_FIRST_COLOR, RANDOMIZE_LAST_COLOR,
+  CHANGE_DIRECTION, RANDOMIZE_FIRST_COLOR, RANDOMIZE_LAST_COLOR,
 } from '../actions';
 
 // == State
@@ -17,33 +17,20 @@ const initialeState = {
 
 // Le reducer est une fonction. On passe le state initial au reducer. Le rôle du reducer est de retrouner toujours un state
 // action est un objet, action = {}
-const reducer = (state = initialeState, action) => {
-  console.log('state', state);
+const reducer = (stateActuel = initialeState, action = {}) => {
+  console.log('state', stateActuel);
   console.log('action', action);
   switch (action.type) {
-    case CHANGE_DIRECTION_TO_LEFT:
-      // Ici on crée un nouvel objet pour le state. On est en déclaratif, il y a toujours la notion d'immutabilité
+    case CHANGE_DIRECTION:
       return {
-        ...state, // Ici on garde le state et on rajoute la nouvelle donnée
-        direction: '270deg',
-      };
-
-    case CHANGE_DIRECTION_TO_RIGHT:
-      return {
-        ...state,
-        direction: '90deg',
-      };
-
-    case CHANGE_DIRECTION_TO_45:
-      return {
-        ...state,
-        direction: '45deg',
+        ...stateActuel,
+        direction: action.direction,
       };
 
     case RANDOMIZE_FIRST_COLOR:
       return {
-        ...state,
-        nbColors: state.nbColors + 1,
+        ...stateActuel,
+        nbColors: stateActuel.nbColors + 1,
         // solution 1
         // on a la possibilité de venir éxécuter la fonction randomHexColor directement dans le nouveau state
         // firstColor: randomHexColor(),
@@ -54,13 +41,13 @@ const reducer = (state = initialeState, action) => {
 
     case RANDOMIZE_LAST_COLOR:
       return {
-        ...state,
-        nbColors: state.nbColors + 1,
+        ...stateActuel,
+        nbColors: stateActuel.nbColors + 1,
         lastColor: action.lastColor,
       };
 
     default:
-      return state;
+      return stateActuel;
   }
 };
 
