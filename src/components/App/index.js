@@ -7,8 +7,8 @@ import React from 'react';
 // à la place du Stateless component
 import NbColors from 'src/containers/NbColors';
 import RandomButtons from 'src/components/RandomButtons';
-import Colors from 'src/components/Colors';
-import Gradient from 'src/components/Gradient';
+import Colors from 'src/containers/Colors';
+import Gradient from 'src/containers/Gradient';
 import DirectionButtons from 'src/components/DirectionButtons';
 import reactLogo from './react-logo.svg';
 import './styles.scss';
