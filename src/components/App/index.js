@@ -6,7 +6,7 @@ import React from 'react';
 // ici on vient utiliser le container (composant connecté au state)
 // à la place du Stateless component
 import NbColors from 'src/containers/NbColors';
-import RandomButtons from 'src/components/RandomButtons';
+import RandomButtons from 'src/containers/RandomButtons';
 import Colors from 'src/containers/Colors';
 import Gradient from 'src/containers/Gradient';
 import DirectionButtons from 'src/components/DirectionButtons';

@@ -1,23 +1,21 @@
+/* eslint-disable implicit-arrow-linebreak */
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { randomizeFirstColor, randomizeLastColor } from 'src/actions';
-import { randomHexColor } from 'src/utils';
+// import { useDispatch } from 'react-redux';
+// import { randomizeFirstColor, randomizeLastColor } from 'src/actions';
+// import { randomHexColor } from 'src/utils';
+import PropTypes from 'prop-types';
 import './styles.scss';
 
-const RandomButtons = () => {
+const RandomButtons = ({ onClickRandomFirstButton, onClickRandomLastButton }) =>
   // useDispatch nous met à disposition la fonction dispatch du store = store.disptach
-  const dispatch = useDispatch();
-  return (
+  // const dispatch = useDispatch();
+  (
     <div className="buttons group">
       <button
         type="button"
         className="button"
         id="randFirst"
-        onClick={() => {
-          const firstColor = randomHexColor();
-          const action = randomizeFirstColor(firstColor);
-          dispatch(action);
-        }}
+        onClick={onClickRandomFirstButton}
       >
         Random First
       </button>
@@ -26,12 +24,8 @@ const RandomButtons = () => {
         className="button"
         id="randAll"
         onClick={() => {
-          const firstColor = randomHexColor();
-          const lastColor = randomHexColor();
-          const actionFirst = randomizeFirstColor(firstColor);
-          const actionLast = randomizeLastColor(lastColor);
-          dispatch(actionFirst);
-          dispatch(actionLast);
+          onClickRandomFirstButton();
+          onClickRandomLastButton();
         }}
       >
         Random All
@@ -40,16 +34,15 @@ const RandomButtons = () => {
         type="button"
         className="button"
         id="randLast"
-        onClick={() => {
-          const lastColor = randomHexColor();
-          const action = randomizeLastColor(lastColor);
-          dispatch(action);
-        }}
+        onClick={onClickRandomLastButton}
       >
         Random Last
       </button>
     </div>
   );
+RandomButtons.propTypes = {
+  onClickRandomFirstButton: PropTypes.func.isRequired,
+  onClickRandomLastButton: PropTypes.func.isRequired,
 };
 
 export default RandomButtons;

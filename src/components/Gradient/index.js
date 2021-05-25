@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const Gradient = ({ firstColorProps, lastColorProps }) => (
+const Gradient = ({ firstColorProps, directionProps, lastColorProps }) => (
   <div
     className="gradient"
-    style={{ background: `linear-gradient(45deg, ${firstColorProps},${lastColorProps})` }}
+    style={{ background: `linear-gradient(${directionProps}, ${firstColorProps},${lastColorProps})` }}
   />
 );
 
 Gradient.propTypes = {
   firstColorProps: PropTypes.string.isRequired,
   lastColorProps: PropTypes.string.isRequired,
+  directionProps: PropTypes.string.isRequired,
 };
 
 export default Gradient;

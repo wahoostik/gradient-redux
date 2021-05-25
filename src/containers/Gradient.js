@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   // du state dans le reducer
   firstColorProps: state.firstColor,
   lastColorProps: state.lastColor,
+  directionProps: state.direction,
 });
 
 const mapDispatchToProps = () => ({});
